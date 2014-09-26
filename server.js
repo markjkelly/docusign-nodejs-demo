@@ -1,5 +1,4 @@
 var express = require('express');
-var wait = require('wait.for');
 var bodyParser = require('body-parser');
 var app = express();
 
