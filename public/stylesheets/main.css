@@ -1,0 +1,13 @@
+.container {
+	max-width: 600px;
+}
+
+body {
+	font-size: 18px;
+	padding: 10px;
+}
+
+//
+div {
+	border: solid 1px silver;
+}

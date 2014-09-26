@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+<title>DocuSign Demo</title>
+
+
+<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="stylesheets/main.css" />
+<script src="jquery/dist/jquery.js"></script>
+<script src="bootstrap/dist/js/bootstrap.js"></script>
+
+</head>
+
+<body>
+	<a href="https://www.docusign.com.au/demo"><img
+		src="images/DocuSignAu.png" alt="Header"></a>
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="col-md-6 col-md-offset-1">
+		<H2>Try DocuSigning Today</H2>
+		<p>Please fill in your name and email address below. Once you
+			select 'DocuSign' you will be taken to the DocuSign portal to sign
+			your document.</p>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1">
+			<form class="form-horizontal" name="myForm" action="/" method="post">
+				<fieldset>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="textinput">Full
+							Name</label>
+						<div class="col-sm-6">
+							<input type="text" id="fullname" name="fullname"
+								class="form-control" required>
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="textinput">Email</label>
+						<div class="col-sm-6">
+							<input type="email" id="signeremail" name="signeremail"
+								class="form-control" required>
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="textinput">Mobile
+							Phone</label>
+						<div class="col-sm-6">
+							<input type="tel" id="mobilephone" name="mobilephone" placeholder="Please prefix number with '+' and international country code"
+								pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"
+								class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="pull-left">
+								<button type="submit" class="btn btn-primary">DocuSign</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<!-- /.row -->
+
+</body>
+
+</html>
