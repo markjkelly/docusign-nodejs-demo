@@ -1,1 +1,16 @@
 node_modules
+bower_components
+.jshintrc
+.project
+.classpath
+.settings/
+
+######################
+# Windows
+######################
+ 
+# Windows image file caches
+Thumbs.db 
+ 
+# Folder config file
+Desktop.ini
