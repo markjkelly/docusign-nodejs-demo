@@ -1,8 +1,8 @@
 {
-    "email" : "",
-    "password" : "",
-    "integratorKey" : "",
-    "templateId" : "",
-    "templateRoleName" : "",
-    "baseUrl" : ""
+    "email" : "mark.kelly@docusign.com",
+    "password" : "password8",
+    "integratorKey" : "DOCU-0d0ffcb8-b8a4-4fb2-a42b-8a7e29f561fc",
+    "templateId" : "21B46E9C-A3C0-44E1-8B29-4FC23109864F",
+    "templateRoleName" : "Signer",
+    "baseUrl" : "https://demo.docusign.net/restapi/v2/accounts/378107"
 }
