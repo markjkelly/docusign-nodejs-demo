@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+<title>DocuSign Demo</title>
+
+
+<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="stylesheets/main.css" />
+<script src="jquery/dist/jquery.js"></script>
+<script src="bootstrap/dist/js/bootstrap.js"></script>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<!-- Main component for a primary marketing message or call to action -->
+		<div class="jumbotron">
+
+			<img src="images/docusign_logo_new.png"
+				class="img-responsive center-block">
+
+			<h2 class="text-center">Signing Complete!</h2>
+
+			<div class="btn-group btn-group-lg">
+				<button type="button" class="btn btn-default" href="/demo">
+					Sign Again</button>
+				<button type="button" class="btn btn-default"
+					href="/downloadDocument?envelopeId=<%= envelopeId %>" role="button">
+					Signed Document</button>
+				<button type="button" class="btn btn-default"
+					href="/downloadCertificate?envelopeId=<%= envelopeId %>"
+					role="button">View Certificate</button>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+
+</html>
