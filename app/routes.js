@@ -6,6 +6,10 @@ var fs = require("fs");
 
 var config = require('./../config.json');
 
+var email = process.env.DS_EMAIL;
+var password = process.env.DS_PASSWORD;
+var integratorKey = process.env.DS_INT_KEY;
+
 module.exports = function(app) {
 
 	app.get('/', function(req, res) {
@@ -108,8 +112,8 @@ module.exports = function(app) {
 											// headers
 											var options = initializeRequest(
 													url, "POST", body,
-													config.email,
-													config.password);
+													email,
+													password);
 
 											// send the request...
 											console.dir(options);
@@ -157,8 +161,8 @@ module.exports = function(app) {
 											// headers
 											var options = initializeRequest(
 													url, "POST", body,
-													config.email,
-													config.password);
+													email,
+													password);
 
 											console.dir(options);
 
@@ -208,8 +212,8 @@ module.exports = function(app) {
 											// body, and headers
 											var options = initializeRequest(
 													url, "GET", body,
-													config.email,
-													config.password);
+													email,
+													password);
 
 											// http headers needed for this
 											// call
@@ -286,8 +290,8 @@ module.exports = function(app) {
 											// body, and headers
 											var options = initializeRequest(
 													url, "GET", body,
-													config.email,
-													config.password);
+													email,
+													password);
 
 											// http headers needed for this
 											// call
@@ -359,9 +363,9 @@ module.exports = function(app) {
 	function addRequestHeaders(options, email, password) {
 		// JSON formatted authentication header (XML format allowed as well)
 		dsAuthHeader = JSON.stringify({
-			"Username" : config.email,
-			"Password" : config.password,
-			"IntegratorKey" : config.integratorKey
+			"Username" : email,
+			"Password" : password,
+			"IntegratorKey" : integratorKey
 		// global
 		});
 		// DocuSign authorization header

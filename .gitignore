@@ -3,8 +3,7 @@ node_modules
 .project
 .classpath
 .settings/
-
->>>>>>> refs/remotes/origin/master
+*.env
 
 ######################
 # Windows
