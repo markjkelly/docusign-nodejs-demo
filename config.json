@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "email" : "mark.kelly@docusign.com",
     "password" : "password8",
     "integratorKey" : "DOCU-0d0ffcb8-b8a4-4fb2-a42b-8a7e29f561fc",
@@ -6,3 +7,12 @@
     "templateRoleName" : "Signer",
     "baseUrl" : "https://demo.docusign.net/restapi/v2/accounts/378107"
 }
+=======
+    "email" : ,
+    "password" : ,
+    "integratorKey" : ,
+    "templateId" : ,
+    "templateRoleName" : ,
+    "baseUrl" : 
+}
+>>>>>>> refs/remotes/origin/master

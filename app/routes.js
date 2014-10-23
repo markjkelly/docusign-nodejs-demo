@@ -8,12 +8,15 @@ var config = require('./../config.json');
 
 module.exports = function(app) {
 
+<<<<<<< HEAD
 	app.get('/', function(req, res) {
 
 		res.render('index');
 	});
 	
 	
+=======
+>>>>>>> refs/remotes/origin/master
 	app.get('/demo', function(req, res) {
 
 		res.render('index');
