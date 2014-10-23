@@ -3,7 +3,10 @@ node_modules
 .project
 .classpath
 .settings/
+
 /config.json
+
+>>>>>>> refs/remotes/origin/master
 
 ######################
 # Windows

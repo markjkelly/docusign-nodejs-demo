@@ -7,6 +7,12 @@ var fs = require("fs");
 var config = require('./../config.json');
 
 module.exports = function(app) {
+
+	app.get('/', function(req, res) {
+
+		res.render('index');
+	});
+
 	
 	app.get('/demo', function(req, res) {
 
