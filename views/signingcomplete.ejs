@@ -22,24 +22,17 @@
 	<div class="container">
 
 		<!-- Main component for a primary marketing message or call to action -->
-		<div class="jumbotron">
+		<div class="jumbotron text-center">
 
-			<img src="images/docusign_logo_new.png"
-				class="img-responsive center-block">
-
-			<h2 class="text-center">Signing Complete!</h2>
-
-			<div class="btn-group btn-group-lg">
-				<button type="button" class="btn btn-default" href="/demo">
-					Sign Again</button>
-				<button type="button" class="btn btn-default"
-					href="/downloadDocument?envelopeId=<%= envelopeId %>" role="button">
-					Signed Document</button>
-				<button type="button" class="btn btn-default"
-					href="/downloadCertificate?envelopeId=<%= envelopeId %>"
-					role="button">View Certificate</button>
+			<div class="row" style="height:120px;">
+				<img src="images/docusign_thank_you.png" class="img-responsive center-block img-rounded">
 			</div>
-
+			
+			<div class="row">
+				<a class="btn btn-default" href="/demo">Sign Again <span class="glyphicon glyphicon-pencil"></span></a> 
+				<a class="btn btn-default" href="/downloadDocument?envelopeId=<%= envelopeId %>" >View Document <span class="glyphicon glyphicon-eye-open"></span></a>
+				<a class="btn btn-default" href="/downloadCertificate?envelopeId=<%= envelopeId %>">View Certificate <span class="glyphicon glyphicon-eye-open"></span></a>
+			</div>
 		</div>
 
 	</div>
