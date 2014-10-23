@@ -3,6 +3,7 @@ node_modules
 .project
 .classpath
 .settings/
+#/config.json
 
 ######################
 # Windows
