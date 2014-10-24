@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({
 	extended : true
 }));
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 // load the routes
 require('./app/routes')(app);
