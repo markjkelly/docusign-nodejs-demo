@@ -9,10 +9,12 @@ app.use(bodyParser.urlencoded({
 	extended : true
 }));
 
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var ipaddr  = process.env.OPENSHIFT_NODEJS_IP;
 
 // load the routes
 require('./app/routes')(app);
 
-app.listen(port);
-console.log("App listening on port:" + port);
+app.listen(port, ipaddr, function(){
+	  console.log('Express server listening on '+ ipaddr + ':' + port);
+	});
