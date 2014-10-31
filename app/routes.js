@@ -14,20 +14,23 @@ module.exports = function(app) {
 
 	app.get('/', function(req, res) {
 
-		res.render('index');
+		res.render(' tryDocuSignDocument');
+	});
+	
+	app.get('/documentDemo', function(req, res) {
+
+		res.render(' tryDocuSignDocument');
 	});
 
-	
-	app.get('/demo', function(req, res) {
+	app.get('/templateDemo', function(req, res) {
 
-		res.render('index');
+		res.render('tryDocuSignTemplate');
 	});
 
 	app.get('/complete', function(req, res) {
 
 		var envelopeId = req.param("envelopeId");
 		console.log("envelopeId: [" + envelopeId + "]");
-
 
 		res.render('signingcomplete', {
 			envelopeId : envelopeId
@@ -37,7 +40,7 @@ module.exports = function(app) {
 
 	app
 			.post(
-					'/',
+					'/template',
 					function(req, res) {
 
 						var signingUrl;
@@ -75,7 +78,7 @@ module.exports = function(app) {
 													+ "/envelopes";
 											var body = JSON
 													.stringify({
-														"emailSubject" : "Embedded Signing",
+														"emailSubject" : "Embedded Signing from Template",
 														"emailBlurb" : "Please sign...thanks!",
 														"compositeTemplates" : [ {
 															"serverTemplates" : [ {
@@ -111,8 +114,7 @@ module.exports = function(app) {
 											// and
 											// headers
 											var options = initializeRequest(
-													url, "POST", body,
-													email,
+													url, "POST", body, email,
 													password);
 
 											// send the request...
@@ -160,8 +162,7 @@ module.exports = function(app) {
 											// and
 											// headers
 											var options = initializeRequest(
-													url, "POST", body,
-													email,
+													url, "POST", body, email,
 													password);
 
 											console.dir(options);
@@ -189,6 +190,179 @@ module.exports = function(app) {
 					});
 
 	app
+			.post(
+					'/document',
+					function(req, res) {
+
+						var signingUrl;
+						var envelopeId;
+						var currentUrl = req.get('host');
+						console.dir("currentUrl: [" + currentUrl + "]");
+						var returnUrl = "http://" + currentUrl + "/complete";
+						console.dir("returnUrl: [" + returnUrl + "]");
+
+						var clientUserId = randomstring.generate(20);
+						console.dir("clientUserId: [" + clientUserId + "]");
+						console.dir(req.body);
+
+						var fullname = req.body.fullname;
+						var signerEmail = req.body.signeremail;
+						var mobilePhone = req.body.mobilephone;
+						var requireIdLookup = false;
+
+						if (mobilePhone !== "") {
+							requireIdLookup = true;
+							console.dir("requireIdLookup: [" + requireIdLookup
+									+ "]");
+						}
+
+						async
+								.series([
+
+										function(next) {
+
+											console
+													.dir("Step 1 - Send envelope");
+
+											var url = config.baseUrl
+													+ "/envelopes";
+
+											var body = {
+												"recipients" : {
+													"signers" : [ {
+														"email" : signerEmail,
+														"name" : fullname,
+														"recipientId" : 1,
+														"clientUserId" : clientUserId,
+														"accessCode" : "",
+														"requireIdLookup" : requireIdLookup,
+														"idCheckConfigurationName" : "SMS Auth $",
+														"smsAuthentication" : {
+															"senderProvidedNumbers" : [ mobilePhone ]
+														},
+														"tabs" : {
+															"signHereTabs" : [ {
+																"anchorString" : "/S1Sign/",
+																"anchorXOffset" : "-20",
+																"anchorYOffset" : "120"
+															} ],
+															"initialHereTabs" : [ {
+																"anchorString" : "/S1Initial/",
+																"anchorXOffset" : "10",
+																"anchorYOffset" : "120"
+															} ],
+															"fullNameTabs" : [ {
+																"anchorString" : "/S1FullName/",
+																"anchorXOffset" : "-20",
+																"anchorYOffset" : "120"
+															} ],
+															"dateSignedTabs" : [ {
+																"anchorString" : "/S1Date/",
+																"anchorXOffset" : "0",
+																"anchorYOffset" : "120"
+															} ]
+														}
+													} ]
+												},
+												"emailSubject" : 'Embedded Signing from document',
+												"documents" : [ {
+													"name" : "Try DocuSigning.docx",
+													"documentId" : 1,
+												} ],
+												"status" : "sent",
+											};
+
+											var options = initializeRequest(
+													url, "POST", body, email,
+													password);
+
+											options.headers["Content-Type"] = "multipart/form-data";
+
+											options.multipart = [
+													{
+														"Content-Type" : "application/json",
+														"Content-Disposition" : "form-data",
+														"body" : JSON
+																.stringify(body),
+													},
+													{
+														"Content-Type" : "application/pdf",
+														'Content-Disposition' : 'file; filename="'
+																+ "Try DocuSigning.docx"
+																+ '"; documentId=1',
+														"body" : fs
+																.readFileSync("resources/Try DocuSigning.docx"),
+													} ];
+
+											request(
+													options,
+													function(err, res, body) {
+														if (!parseResponseBody(
+																err, res, body))
+															return;
+														else
+															envelopeId = JSON
+																	.parse(body).envelopeId;
+														console.log(signingUrl);
+														next(null);
+													});
+										},
+
+										// ////////////////////////////////////////////////////////////////////
+										// Step 2 - Get the Embedded Signing
+										// View
+										// (aka the recipient view)
+										// ////////////////////////////////////////////////////////////////////
+										function(next) {
+
+											console
+													.dir("Step 2 - Get the Embedded Signing View");
+											var url = config.baseUrl
+													+ "/envelopes/"
+													+ envelopeId
+													+ "/views/recipient";
+											var method = "POST";
+											var body = JSON
+													.stringify({
+														"returnUrl" : returnUrl
+																+ "?envelopeId="
+																+ envelopeId,
+														"authenticationMethod" : "email",
+														"email" : signerEmail,
+														"userName" : fullname,
+														"clientUserId" : clientUserId,
+													});
+
+											var options = initializeRequest(
+													url, "POST", body, email,
+													password);
+
+											console.dir(options);
+
+											// send the request...
+											request(options, function(err, res,
+													body) {
+												if (!parseResponseBody(err,
+														res, body))
+													return;
+												else
+													signingUrl = JSON
+															.parse(body).url;
+												console.log(signingUrl);
+												next(null);
+											});
+										},
+
+										// ////////////////////////////////////////////////////////////////////
+										// Step 3 - Redirect to Signing View
+										// ////////////////////////////////////////////////////////////////////
+										function(err) {
+											res.redirect(signingUrl);
+										} ]);
+
+					});
+
+	app
 			.get(
 					'/downloadDocument',
 					function(req, res) {
@@ -211,8 +385,7 @@ module.exports = function(app) {
 											// set request url, method,
 											// body, and headers
 											var options = initializeRequest(
-													url, "GET", body,
-													email,
+													url, "GET", body, email,
 													password);
 
 											// http headers needed for this
@@ -289,8 +462,7 @@ module.exports = function(app) {
 											// set request url, method,
 											// body, and headers
 											var options = initializeRequest(
-													url, "GET", body,
-													email,
+													url, "GET", body, email,
 													password);
 
 											// http headers needed for this
