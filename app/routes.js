@@ -421,6 +421,8 @@ module.exports = function(app, io) {
 
     app.post('/connect', function(req, res) {
 
+	console.log("Entering /connect");
+
 	var xml2js = require('xml2js');
 	var util = require('util');
 	var parser = new xml2js.Parser();
@@ -435,10 +437,15 @@ module.exports = function(app, io) {
 
 	    async.waterfall([ function(callback) {
 
-		// console.log(data);
+		console.log(data);
 
 		// Parse XML to JSON
 		parser.parseString(data, function(err, json) {
+
+		    if (err) {
+			console.log(error);
+			return;
+		    }
 
 		    callback(null, json);
 
@@ -453,6 +460,11 @@ module.exports = function(app, io) {
 		ConnectUpdate.findOne({
 		    _id : json.DocuSignEnvelopeInformation.EnvelopeStatus[0].EnvelopeID
 		}).exec(function(err, connectUpdate) {
+
+		    if (err) {
+			console.log(error);
+			return;
+		    }
 
 		    if (connectUpdate === null) {
 			new ConnectUpdate({
@@ -483,6 +495,11 @@ module.exports = function(app, io) {
 
 	    } ], function(err, result) {
 
+		if (err) {
+		    console.log(error);
+		    return;
+		}
+
 		console.log("Processing Connect Update Complete");
 
 	    });
@@ -500,6 +517,11 @@ module.exports = function(app, io) {
 	query.sort('-statusTimestamp');
 
 	query.exec(function(err, connectUpdates) {
+
+	    if (err) {
+		console.log(error);
+		return;
+	    }
 
 	    res.render('connectUpdates', {
 		title : 'Title',
