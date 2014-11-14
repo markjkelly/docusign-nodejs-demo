@@ -1,13 +1,8 @@
-.container {
-	max-width: 600px;
-}
-
 body {
-	font-size: 18px;
-	padding: 10px;
+	padding-top: 100px; /* Whatever the height of your navbar is; the
+                             default is 50px */
 }
 
-//
-div {
-	border: solid 1px silver;
+.top-buffer {
+	margin-top: 50px;
 }

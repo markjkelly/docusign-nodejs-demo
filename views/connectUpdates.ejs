@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title><%= title %></title>
+<link rel="stylesheet" href="stylesheets/main.css" />
+<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" />
+<script src="bootstrap/dist/js/bootstrap.js"></script>
+<script src="jquery/dist/jquery.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="bootstrap-table/src/bootstrap-table.css">
+<script src="bootstrap-table/src/bootstrap-table.js"></script>
+
+<script>
+    if (window.jQuery) {
+	console.log('jQuery loaded');
+    } else {
+	console.log('jQuery not loaded');
+    }
+
+    $(document).ready(function() {
+	console.log("ready!");
+    });
+
+    var socket = io.connect();
+    socket.on('connect_update', function(data) {
+	console.log('connect_update recieved');
+	console.log(data);
+	console.log($('div').html());
+
+	$("tr:last").css({
+	    backgroundColor : "yellow",
+	    fontWeight : "bolder"
+	});
+
+    });
+</script>
+</head>
+<body>
+
+	<div class="container">
+
+		<table id="myTable"
+			class="table table-hover table-bordered table-striped table-responsive">
+			<thead class="span6">
+				<tr>
+					<th>Envelope ID</th>
+					<th>Envelope Status</th>
+					<th>Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% updates.forEach( function (update){ %>
+				<tr>
+					<td><%= update._id %></td>
+					<td><%= update.envelopeStatus %></td>
+					<td><%= update.statusTimestamp %></td>
+				</tr>
+				<% }); %>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

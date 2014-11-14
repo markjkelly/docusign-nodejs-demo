@@ -1,38 +1,44 @@
-	{
-	  "name": "docusign-nodejs-demo",
-	  "version": "0.0.1",
-	  "description": "A DocuSign demo application written in node.js ",
-	  "homepage": "https://github.com/markjkelly/docusign-nodejs-demo",
-	  "keywords": [
-	    "OpenShift",
-	    "Node.js",
-	    "application",
-	    "openshift"
-	  ],
-
-	  "repository": {
-	    "type": "git",
-	    "url": "https://gitub.com/openshift-quickstart/openshift-mongo-node-express-example"
-	  },
-
-	  "engines": {
-	    "node": ">= 0.10.0",
-	    "npm": ">= 1.0.0"
-	  },
-
-	  "dependencies": {
-		    "express": "4.4.4",
-		    "ejs": "0.8.5",
-		    "ejs-locals": "1.0.2",
-		    "mongoose": "3.8.1",
-		    "body-parser": "1.9.1",
-		    "async": "0.9.0",
-		    "request": "2.42.0",
-		    "randomstring": "1.0.3"
-	  },
-
-	  "devDependencies": {},
-	  "bundleDependencies": [],
-	  "private": true,
-	  "main": "server.js"
-	}
+{
+  "name": "docusign-nodejs-demo",
+  "version": "0.0.1",
+  "description": "A DocuSign demo application written in node.js ",
+  "homepage": "https://github.com/markjkelly/docusign-nodejs-demo",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitub.com/openshift-quickstart/openshift-mongo-node-express-example"
+  },
+  "engines": {
+    "node": ">= 0.10.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "express": "4.4.4",
+    "ejs": "0.8.5",
+    "ejs-locals": "1.0.2",
+    "mongoose": "^3.8.1",
+    "body-parser": "1.9.1",
+    "async": "0.9.0",
+    "request": "2.42.0",
+    "randomstring": "1.0.3",
+    "concat-stream": "1.4.6",
+    "libxmljs": "^0.12.0",
+    "libxmljs-easy": "^0.1.5",
+    "xml2js": "^0.4.4",
+    "date-utils": "^1.2.16",
+    "moment": "^2.8.3",
+    "moment-timezone": "^0.2.4",
+    "socket.io": "^1.2.0",
+    "express.io": "^1.1.13",
+    "mongojs": "^0.17.0"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "private": true,
+  "main": "server.js"
+}

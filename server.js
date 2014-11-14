@@ -1,20 +1,25 @@
-var express = require('express');
+var express = require('express.io');
+var app = require('express.io')();
+app.http().io();
 var bodyParser = require('body-parser');
 
-var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("bower_components"));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
-	extended : true
+    extended : true
 }));
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
-var ipaddr  = process.env.OPENSHIFT_NODEJS_IP;
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 // load the routes
-require('./app/routes')(app);
+var routes = require('./app/routes');
+routes(app, io);
 
-app.listen(port, ipaddr, function(){
-	  console.log('Express server listening on '+ ipaddr + ':' + port);
-	});
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var ipaddr = process.env.OPENSHIFT_NODEJS_IP;
+
+server.listen(port, ipaddr, function() {
+    console.log('Express server listening on ' + ipaddr + ':' + port);
+});
